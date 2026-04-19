@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlplt"
+version = "2.0.1"
+description = "The complete ML toolkit — EDA, cleaning, training, explainability, deployment"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Anannya Vyas", email = "vyasanannya@gmail.com" }]
+keywords = ["machine-learning", "eda", "data-science", "automl", "explainability"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=1.5",
+    "numpy>=1.23",
+    "scikit-learn>=1.2",
+    "matplotlib>=3.6",
+    "seaborn>=0.12",
+    "plotly>=5.0",
+    "rich>=13.0",
+    "joblib>=1.2",
+    "ollama>=0.1.0",
+    "groq>=0.5.0",
+    "fairlearn>=0.9.0",
+    "transformers>=4.38.0",
+    "torch>=2.0.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+lgbm   = ["lightgbm>=4.0"]
+shap   = ["shap>=0.42"]
+optuna = ["optuna>=3.0"]
+prophet = ["prophet>=1.1"]
+nlp    = ["transformers>=4.30", "sentence-transformers>=2.2"]
+imb    = ["imbalanced-learn>=0.11"]
+deploy = ["fastapi>=0.100", "uvicorn>=0.23"]
+ai     = ["ollama", "groq", "fairlearn"]
+full   = [
+    "mlpilot[xgb,lgbm,shap,optuna,prophet,nlp,imb,deploy,ai]"
+]
+dev    = ["pytest>=7.0", "pytest-cov>=4.0", "black>=23.0", "ruff>=0.1", "mypy>=1.0", "pre-commit>=3.0"]
+
+[project.urls]
+"Homepage" = "https://github.com/Anannya-Vyas/mlplt-my-python-library-"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["mlpilot*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+ignore_missing_imports = true
