@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: mlplt
-Version: 2.0.4
+Version: 2.0.5
 Summary: The complete ML toolkit — EDA, cleaning, training, explainability, deployment
 Author-email: Anannya Vyas <vyasanannya@gmail.com>
 License: MIT License
@@ -108,7 +108,7 @@ Most Machine Learning libraries fail when things get messy—or worse, they give
 
 ## ⚡ Quick Start: The "Omni-Pipeline"
 
-Execute a professional, honest ML workflow in **10 lines of code**:
+Execute a professional, honest ML workflow in **10 lines of code**. For a detailed step-by-step guide, see our **[🚀 Hands-On Tutorial (Titanic)](TUTORIAL.md)**.
 
 ```python
 import mlpilot as ml

@@ -141,7 +141,11 @@ class Explainer:
                 height=max(400, n_features * 25),
                 xaxis_title="Mean |SHAP value|",
             )
-            fig.show()
+            from mlpilot.utils.env import is_colab
+            if is_colab():
+                fig.show(renderer="colab")
+            else:
+                fig.show()
             return fig
         except ImportError:
             # Print table fallback
@@ -248,7 +252,11 @@ class Explainer:
                              template="plotly_dark",
                              paper_bgcolor="#1a1d2e", plot_bgcolor="#1a1d2e",
                              font_color="#e2e8f0")
-            fig.show()
+            from mlpilot.utils.env import is_colab
+            if is_colab():
+                fig.show(renderer="colab")
+            else:
+                fig.show()
         except Exception:
             pass
 

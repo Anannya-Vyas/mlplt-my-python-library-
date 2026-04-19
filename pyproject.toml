@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mlplt"
-version = "2.0.4"
+version = "2.0.5"
 description = "The complete ML toolkit — EDA, cleaning, training, explainability, deployment"
 readme = "README.md"
 license = { file = "LICENSE" }

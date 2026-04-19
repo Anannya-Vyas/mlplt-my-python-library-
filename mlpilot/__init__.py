@@ -98,7 +98,8 @@ def session(name: str = "mlpilot_session", **kwargs):
 
 def colab_setup(**kwargs):
     """setup_ollama — automatic Ollama setup for Google Colab."""
-    from mlpilot.utils.colab import setup_ollama
+    from mlpilot.utils.colab import setup_ollama, optimize_plotting
+    optimize_plotting()
     return setup_ollama(**kwargs)
 
 
@@ -136,7 +137,7 @@ def DataStory(engine: str = "auto", **kwargs):
 # Metadata
 # ---------------------------------------------------------------------------
 
-__version__ = "2.0.4"
+__version__ = "2.0.5"
 __author__ = "Anannya Vyas"
 __license__ = "MIT"
 

@@ -49,6 +49,21 @@ def setup_ollama(model_to_pull: str = "llama3.2", verbose: bool = False):
         pass # Fail silently so the fallback logic can take over
 
 
+
+def optimize_plotting():
+    """Configure Plotly and Matplotlib for optimal rendering in Google Colab."""
+    try:
+        # Configure Plotly
+        import plotly.io as pio
+        pio.renderers.default = "colab"
+        
+        # Configure Matplotlib for inline display
+        import matplotlib.pyplot as plt
+        plt.ion() # Interactive mode
+    except ImportError:
+        pass
+
+
 def install_dependencies():
     """Install all optional dependencies needed for AI features."""
     print_step("Installing mlpilot[ai] dependencies...", "📦")
