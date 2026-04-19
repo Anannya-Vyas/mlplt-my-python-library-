@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 
 from mlpilot.clean.diff import CleaningReport
-from mlpilot.clean.strategies import CategoryUnifier, DtypeFixer, NullStrategy, OutlierStrategy
+from mlpilot.clean.strategies import CategoryUnifier, DtypeFixer, NullStrategy, OutlierStrategy, LeakageGuard
 from mlpilot.utils.display import print_step, print_success, print_warning
 from mlpilot.utils.report_base import HTMLReportBuilder
 from mlpilot.utils.types import BaseResult
@@ -346,7 +346,16 @@ class AutoCleaner:
         if self.verbose and outlier_changes:
             print_step(f"Handled {n_out} outliers ({self.outlier_action})", "! ")
 
-        # 6. Custom rules
+        # 6. Leakage Guard (Anti-Cheating Check)
+        if self.target:
+            guard = LeakageGuard()
+            guard.fit(df, target=self.target, protect_cols=self.protect_cols)
+            df, leakage_changes = guard.transform(df)
+            all_changes.extend(leakage_changes)
+            if self.verbose and leakage_changes:
+                print_warning(f"Dropped {len(leakage_changes)} leaky proxy columns")
+
+        # 7. Custom rules
         for rule in self.custom_rules:
             df, change = rule.apply(df)
             if change:

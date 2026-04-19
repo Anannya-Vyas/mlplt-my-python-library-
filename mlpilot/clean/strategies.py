@@ -364,3 +364,58 @@ class CategoryUnifier:
                     })
 
         return df, changes
+
+# ---------------------------------------------------------------------------
+# Leakage Guard
+# ---------------------------------------------------------------------------
+
+class LeakageGuard:
+    """
+    Detects and removes variables that are perfect or near-perfect proxies 
+    for the target (Data Leakage).
+    
+    Calculates correlation between all features and the target.
+    Drops any feature with abs(correlation) > 0.98.
+    """
+
+    def __init__(self, threshold: float = 0.98):
+        self.threshold = threshold
+        self._leaky_cols: List[str] = []
+
+    def fit(self, df: pd.DataFrame, target: str, protect_cols: Optional[List[str]] = None) -> "LeakageGuard":
+        if not target or target not in df.columns:
+            return self
+        
+        protect_cols = protect_cols or []
+        feat_cols = [c for c in df.columns if c != target and c not in protect_cols]
+        
+        # Prepare data for correlation (numeric only)
+        # We temporarily encode categoricals to catch leakage in strings (like 'alive')
+        temp_df = df[[target] + feat_cols].copy()
+        for col in temp_df.columns:
+            if not pd.api.types.is_numeric_dtype(temp_df[col]):
+                temp_df[col] = temp_df[col].astype('category').cat.codes
+        
+        # Calculate correlation matrix
+        corr_matrix = temp_df.corr().abs()
+        target_corr = corr_matrix[target].drop(labels=[target])
+        
+        self._leaky_cols = target_corr[target_corr > self.threshold].index.tolist()
+        return self
+
+    def transform(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, List[Dict]]:
+        if not self._leaky_cols:
+            return df, []
+        
+        df = df.copy()
+        changes = []
+        for col in self._leaky_cols:
+            if col in df.columns:
+                df = df.drop(columns=[col])
+                changes.append({
+                    "column": col, "action": "drop_leaky_column",
+                    "detail": "Data Leakage detected (Near-perfect correlation to target)",
+                    "n_affected": len(df)
+                })
+        
+        return df, changes
