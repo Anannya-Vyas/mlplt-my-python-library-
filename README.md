@@ -20,7 +20,7 @@ Most Machine Learning libraries fail when things get messy—or worse, they give
 
 ## ⚡ Quick Start: The "Omni-Pipeline"
 
-Execute a professional, honest ML workflow in **10 lines of code**:
+Execute a professional, honest ML workflow in **10 lines of code**. For a detailed step-by-step guide, see our **[🚀 Hands-On Tutorial (Titanic)](TUTORIAL.md)**.
 
 ```python
 import mlpilot as ml
