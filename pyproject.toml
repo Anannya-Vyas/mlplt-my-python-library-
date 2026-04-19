@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mlplt"
-version = "2.0.2"
+version = "2.0.4"
 description = "The complete ML toolkit — EDA, cleaning, training, explainability, deployment"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -53,7 +53,10 @@ full   = [
 dev    = ["pytest>=7.0", "pytest-cov>=4.0", "black>=23.0", "ruff>=0.1", "mypy>=1.0", "pre-commit>=3.0"]
 
 [project.urls]
-"Homepage" = "https://github.com/Anannya-Vyas/mlplt-my-python-library-"
+Homepage = "https://github.com/Anannya-Vyas/mlplt-my-python-library-"
+Source = "https://github.com/Anannya-Vyas/mlplt-my-python-library-"
+Tracker = "https://github.com/Anannya-Vyas/mlplt-my-python-library-/issues"
+Documentation = "https://github.com/Anannya-Vyas/mlplt-my-python-library-#readme"
 
 [tool.setuptools.packages.find]
 where   = ["."]

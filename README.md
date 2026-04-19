@@ -80,9 +80,9 @@ Windows legacy terminals (CP1252) often crash when a library prints emojis. mlpi
 
 ## 📦 Installation & Environments
 
-**Standard Build (v2.0.2)**:
+**Standard Build (v2.0.4)**:
 ```bash
-pip install mlplt==2.0.2
+pip install mlplt==2.0.4
 ```
 
 **GitHub Repository**:
@@ -98,6 +98,6 @@ MLPilot is a professional-grade machine learning toolkit. We welcome bug reports
 - **Email**: [vyasanannya@gmail.com](mailto:vyasanannya@gmail.com)
 - **GitHub**: [Anannya-Vyas/mlplt-my-python-library-](https://github.com/Anannya-Vyas/mlplt-my-python-library-)
 
-**Current Version**: `v2.0.2` (The "Trust & Transparency" Release)
+**Current Version**: `v2.0.4` (The "Public Professional" Release)
 
 MIT © 2026 mlpilot
